@@ -1,8 +1,16 @@
 # FinalProject
-authors: Joshua Ofori<br/>
-         Haris Hibic<br/>
-         Anthony Teye Adjei<br/>
-         
+authors: Joshua OFORI<br/>
+         Haris HIBIC<br/>
+         Anthony TEYE-ADJEI<br/>
+        
+<b>Technologies used</b><br/>
+1.Java<br/>
+2.maven<br/>
+3.bootstrap<br/>
+<b>Tools</b><br/>
+Scenebuilder<br/>
+
+<b>General Info</b><br/>
 This JavaFx Application Stores person data in a database.<br/>
 Lists the person and render it on a table.<br/>
 It uses form to add a new person to the database hence rendered
