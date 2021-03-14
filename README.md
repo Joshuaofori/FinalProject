@@ -1,6 +1,8 @@
 # FinalProject
-author: Joshua Ofori
-
+authors: Joshua Ofori<br/>
+         Haris Hibic<br/>
+         Anthony Teye Adjei<br/>
+         
 This JavaFx Application Stores person data in a database.<br/>
 Lists the person and render it on a table.<br/>
 It uses form to add a new person to the database hence rendered
