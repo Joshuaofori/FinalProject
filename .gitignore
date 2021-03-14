@@ -115,5 +115,6 @@ public/assets
 
 # Ignore simplecov results
 coverage
+#generated db file
 
 sqlite.db

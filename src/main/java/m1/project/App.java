@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
+
 
 import java.io.IOException;
 
@@ -26,9 +28,12 @@ public class App extends Application {
         stage.setTitle("Person List");
         // Load the main layout from file
         mainlayout = loadFXML("MainLayout");
+        mainlayout.getStyleClass().add("panel-primary");
+
         // Back to normal, except we use our newly defined member. Seems cumbersome, but
         // it will make sense in two seconds
         scene = new Scene(mainlayout, 989, 513);
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());;
         stage.setScene(scene);
         stage.show();
         // This is also new for this PW : you have to call the default view you want to

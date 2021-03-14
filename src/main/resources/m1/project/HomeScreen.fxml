@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Box?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="m1.project.view.HomeScreenController">
    <children>
@@ -20,7 +19,6 @@
             <TableColumn fx:id="addressCol" prefWidth="104.0" text="Address" />
         </columns>
       </TableView>
-      <Box depth="100" height="100" layoutX="64.0" layoutY="158.0" width="100.0" />
       <TextField fx:id="lastNameTxt" layoutX="11.0" layoutY="99.0" />
       <TextField fx:id="firstNameTxt" layoutX="11.0" layoutY="56.0" />
       <TextField fx:id="nickNameTxt" layoutX="11.0" layoutY="145.0" />
@@ -28,8 +26,8 @@
       <TextField fx:id="emailTxt" layoutX="11.0" layoutY="225.0" />
       <TextField fx:id="addressTxt" layoutX="11.0" layoutY="267.0" />
       <TextField fx:id="birthDayTxt" layoutX="11.0" layoutY="313.0" />
-      <Button fx:id="addButton" layoutX="14.0" layoutY="387.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="deleteButton" disable="true" layoutX="71.0" layoutY="387.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="exportButton" layoutX="21.0" layoutY="448.0" mnemonicParsing="false" text="Export to File" />
+      <Button fx:id="addButton" layoutX="20.0" layoutY="349.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="deleteButton" disable="true" layoutX="20.0" layoutY="395.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="exportButton" layoutX="20.0" layoutY="439.0" mnemonicParsing="false" text="Export to File" />
    </children>
 </AnchorPane>

@@ -5,10 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import m1.project.Daos.PersonDao;
 import m1.project.Service.PersonService;
@@ -57,7 +54,8 @@ public class HomeScreenController {
             TableColumn<Person,String> addressCol = new TableColumn<>("address");
             @FXML
             Button addButton = new Button();
-            @FXML
+
+    @FXML
             Button deleteButton = new Button();
             @FXML
             Button exportButton = new Button();
@@ -66,13 +64,20 @@ public class HomeScreenController {
 
             @FXML
             public void initialize(){
+                //
+                deleteButton.getStyleClass().setAll("btn","btn-danger");
+                addButton.getStyleClass().setAll("btn","btn-success");
+                exportButton.getStyleClass().setAll("btn","btn-primary");
+
+
+                //
                 firstNameTxt.setPromptText("first Name");
                 lastNameTxt.setPromptText("Last Name");
                 nickNameTxt.setPromptText("Nick name");
                 emailTxt.setPromptText("email");
                 addressTxt.setPromptText("address");
                 phoneTxt.setPromptText("Phone Number");
-                birthDayTxt.setPromptText("Birth Date");
+                birthDayTxt.setPromptText("Birth Date egs 1999-02-20");
 
 
                 firstNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstname()));
@@ -133,6 +138,7 @@ public class HomeScreenController {
                 });
 
 
+
                 tableView.getColumns().addAll(firstNameCol,lastNameCol,nickNameCol,phoneNumberCol,emailAddressCol,addressCol,birthDateCol);
 
                 tableView.setItems(PersonService.getPerson());
@@ -159,6 +165,10 @@ public class HomeScreenController {
                 exportButton.setOnAction(e-> {
                     for(Person p:PersonService.getPerson())
                  PersonService.exportToFile(p);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data Exported", ButtonType.OK);
+
+
+                    alert.showAndWait();
 
 
                 });

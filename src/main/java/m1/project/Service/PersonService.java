@@ -17,15 +17,15 @@ public class PersonService {
     private ObservableList<Person> personObservableList;
 
     private PersonService(){
-        personDao.addPerson(new Person(1, "Ofori","Joshua","anhydrous","0758153585","1 rue de mons embarol",
+        personDao.addPerson(new Person(0, "Ofori","Joshua","anhydrous","0758153585","1 rue du mons",
                         "oforijoshua37@gmail.com", LocalDate.parse("1999-02-20")));
-        personDao.addPerson(new Person(2,"Samuel","Boakye","e-brace","07536780","76 rue du trichon","samuel@gmail.com",
-                LocalDate.parse("2001-02-20")));
-        personDao.addPerson(new Person(2,"Adjei","Anthonh","e-brace","07536780","76 rue du trichon","samuel@gmail.com",
-                LocalDate.parse("2001-02-20")));
-        personDao.addPerson(new Person(2,"Harris","Boakye","e-brace","07536780","76 rue du trichon","samuel@gmail.com",
-                LocalDate.parse("2001-02-20")));
-        personDao.addPerson(new Person(2,"Chris","Boakye","e-brace","07536780","76 rue du trichon","samuel@gmail.com",
+        personDao.addPerson(new Person(0,"Adjei","Anthony","d'accord","075367580","76 rue du trichon","tonyadjei@gmail.com",
+                LocalDate.parse("2000-02-25")));
+        personDao.addPerson(new Person(0,"Harris","Hibic","e-brace","075365782","1 rue du bouvedan","harrishibic@gmail.com",
+                LocalDate.parse("1999-02-20")));
+        personDao.addPerson(new Person(0,"Timo","Wener","turbo","175346781","stamford bridge","timowener@gmail.com",
+                LocalDate.parse("1997-02-20")));
+        personDao.addPerson(new Person(0,"Hudson","Odoi","star boy","237536780","stamford bridge","hudsonodoi@gmail.com",
                 LocalDate.parse("2001-02-20")));
         personObservableList= FXCollections.observableArrayList();
         for(int i=0;i<personDao.listPersons().size();i++){
@@ -69,7 +69,7 @@ public class PersonService {
                         + "ADDRESS:" + p.getAddress() + "BIRTHDAY:"
                         + p.getBirth_date()+ "\n"
 
-                        + "END:VCARD";
+                        + "END:VCARD\n";
 
                 fop.write(str.getBytes());
 
