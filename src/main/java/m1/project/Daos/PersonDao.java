@@ -36,7 +36,7 @@ public class PersonDao {
             }
             connection.close();
         } catch (SQLException e) {
-            // Manage Exception
+
             e.printStackTrace();
 
         }
