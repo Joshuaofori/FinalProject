@@ -40,7 +40,7 @@ public class App extends Application {
 
         // Back to normal, except we use our newly defined member. Seems cumbersome, but
         // it will make sense in two seconds
-        scene = new Scene(mainlayout, 989, 513);
+        scene = new Scene(mainlayout, 1052, 513);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setScene(scene);
         stage.show();

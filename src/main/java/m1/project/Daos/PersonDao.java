@@ -27,7 +27,7 @@ public class PersonDao {
                                 results.getString("phone_number"),
                                 results.getString("address"),
                                 results.getString("email_address"),
-                                results.getDate("birth_date").toLocalDate()
+                                results.getDate("birth_date")
                         ));
 
                     }
@@ -59,7 +59,7 @@ public class PersonDao {
                                 results.getString("phone_number"),
                                 results.getString("address"),
                                 results.getString("email_address"),
-                                results.getDate("birth_date").toLocalDate()
+                                results.getDate("birth_date")
                         );
                     }
                 }
@@ -85,7 +85,7 @@ public class PersonDao {
                 statement.setString(4, person.getPhone_number());
                 statement.setString(5, person.getAddress());
                 statement.setString(6, person.getEmail_address());
-                statement.setDate(7, Date.valueOf(person.getBirth_date()));
+                statement.setDate(7,  (person.getBirth_date()));
                 statement.executeUpdate();
                 ResultSet ids = statement.getGeneratedKeys();
                 if (ids.next()) {
@@ -143,6 +143,28 @@ public class PersonDao {
             throwables.printStackTrace();
         }
     }
+    public boolean updatePersonDate(String name, Date value, Integer id) {
+        try (Connection connection = getDataSource().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("UPDATE  person SET " + name + "  = ? WHERE idperson = ? ")) {
+//                statement.setString(1, name);
+                statement.setDate(1, value);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+
+                statement.close();
+
+            }
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            // Manage Exception
+            System.out.println("couldn't update");
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+    
     public void initDb() {
         try {
             Connection connection = DataSourceFactory.getDataSource().getConnection();

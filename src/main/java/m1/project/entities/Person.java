@@ -1,7 +1,7 @@
 package m1.project.entities;
 
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Person  {
     private Integer id;
@@ -11,14 +11,14 @@ public class Person  {
     private String phone_number;
     private String address;
     private String email_address;
-    private LocalDate birth_date;
+    private Date birth_date;
 
     public Person() {
 
     }
 
     public Person(Integer id, String lastname, String firstname, String nickname, String phone_number, String address,
-                  String email_address, LocalDate birth_date) {
+                  String email_address, Date birth_date) {
 
         this.id = id;
         this.lastname = lastname;
@@ -72,10 +72,10 @@ public class Person  {
     public void setEmail_address(String email_address) {
         this.email_address = email_address;
     }
-    public LocalDate getBirth_date() {
+    public Date getBirth_date() {
         return birth_date;
     }
-    public void setBirth_date(LocalDate birth_date) {
+    public void setBirth_date(Date birth_date) {
         this.birth_date = birth_date;
     }
 

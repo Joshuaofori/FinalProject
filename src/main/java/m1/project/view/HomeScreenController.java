@@ -2,16 +2,19 @@ package m1.project.view;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.value.ObservableValue;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import m1.project.Daos.PersonDao;
 import m1.project.Service.PersonService;
 import m1.project.entities.Person;
-import m1.project.util.PersonValueFactory;
 
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 
@@ -26,7 +29,8 @@ public class HomeScreenController {
             @FXML
             TextField nickNameTxt = new TextField();
             @FXML
-            TextField birthDayTxt = new TextField();
+                    DatePicker birthDayTxt = new DatePicker();
+           // TextField birthDayTxt = new TextField();
             @FXML
             TextField emailTxt = new TextField();
             @FXML
@@ -35,7 +39,7 @@ public class HomeScreenController {
             TextField phoneTxt = new TextField();
 
             @FXML
-            TableView<Person> tableView = new TableView<>();;
+            TableView<Person> tableView = new TableView<>();
 
             @FXML
             TableColumn<Person,String> firstNameCol= new TableColumn<>("firstname");
@@ -49,13 +53,13 @@ public class HomeScreenController {
             @FXML
             TableColumn<Person,String> emailAddressCol = new TableColumn<>("email Address");
             @FXML
-            TableColumn<Person,LocalDate> birthDateCol = new TableColumn<>("birth Date");
+            TableColumn<Person,String> birthDateCol = new TableColumn<>("birth Date");
             @FXML
             TableColumn<Person,String> addressCol = new TableColumn<>("address");
             @FXML
             Button addButton = new Button();
 
-    @FXML
+            @FXML
             Button deleteButton = new Button();
             @FXML
             Button exportButton = new Button();
@@ -85,9 +89,13 @@ public class HomeScreenController {
                 nickNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNickname()));
                 phoneNumberCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhone_number()));
                 emailAddressCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail_address()));
+                birthDateCol.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getBirth_date().toString()));
 
                 addressCol.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getAddress()));
-                birthDateCol.setCellValueFactory(cellData-> new SimpleObjectProperty<>(cellData.getValue().getBirth_date()));
+//                birthDateCol.setCellValueFactory(cellData-> {
+//                    return new Date(Long.valueOf(cellData.getValue().getBirth_date().toString()));
+//                });
+
 
                 firstNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
                firstNameCol.setOnEditCommit(t -> {
@@ -98,10 +106,6 @@ public class HomeScreenController {
                });
                //Sets cellFactory to be able to edit the last name column
                 lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-                /**
-                 * A method for on Edit commit to edit the oberservable list with the new
-                changes made to the editing column
-                 */
                 lastNameCol.setOnEditCommit(t -> {
                     t.getTableView().getItems().get(
                             t.getTablePosition().getRow()).setLastname(t.getNewValue());
@@ -136,6 +140,13 @@ public class HomeScreenController {
                     personDao.updatePerson("address",t.getNewValue(), t.getTableView().getItems().get(
                             t.getTablePosition().getRow()).getId());
                 });
+                birthDateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+                birthDateCol.setOnEditCommit(t -> {
+                    t.getTableView().getItems().get(
+                            t.getTablePosition().getRow()).setBirth_date(Date.valueOf(t.getNewValue()));
+                    personDao.updatePersonDate("birth_date",Date.valueOf(t.getNewValue()), t.getTableView().getItems().get(
+                            t.getTablePosition().getRow()).getId());
+                });
 
 
 
@@ -144,10 +155,11 @@ public class HomeScreenController {
                 tableView.setItems(PersonService.getPerson());
 
                 addButton.setOnAction(e -> {
+                    System.out.println(birthDayTxt.getValue());
                     PersonService.addPerson(new Person(0,firstNameTxt.getText(),lastNameTxt.getText(),nickNameTxt.getText(),
-                            phoneTxt.getText(),addressTxt.getText(),emailTxt.getText(), LocalDate.parse( birthDayTxt.getText())));
+                            phoneTxt.getText(),addressTxt.getText(),emailTxt.getText(),  Date.valueOf((birthDayTxt.getValue()))));
                           firstNameTxt.clear();lastNameTxt.clear();nickNameTxt.clear();phoneTxt.clear();addressTxt.clear();
-                          addressTxt.clear();emailTxt.clear();birthDayTxt.clear();
+                          addressTxt.clear();emailTxt.clear();
                     tableView.setItems(PersonService.getPerson());
                 });
 
@@ -158,10 +170,7 @@ public class HomeScreenController {
                 });
                 this.person=null;
                 deleteButton.setDisable(true);
-                deleteButton.setOnAction(e->{
-                   PersonService.deletePerson(person);
-
-                });
+                deleteButton.setOnAction(e-> PersonService.deletePerson(person));
                 exportButton.setOnAction(e-> {
                     for(Person p:PersonService.getPerson())
                  PersonService.exportToFile(p);

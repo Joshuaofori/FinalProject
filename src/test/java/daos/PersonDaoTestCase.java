@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -30,7 +31,7 @@ public class PersonDaoTestCase {
                         + " email_address VARCHAR(150) NULL,\r\n"	+ "  birth_date DATETIME NULL);" );
         stmt.executeUpdate("DELETE FROM person");
         stmt.executeUpdate("INSERT INTO person(idperson,lastname, firstname, nickname, phone_number, address, email_address,birth_date) "
-                + "VALUES (1, 'Ofori','Joshua','anhydrous','0758153585','1 rue de mons embarol','oforijoshua37@gmail.com', '1999-02-20 12:00:00.000')");
+                + "VALUES (1, 'Ofori','Joshua','anhydrous','0758153585','1 rue de mons embarol','oforijoshua37@gmail.com', 20/02/1999 )");
         stmt.close();
         connection.close();
     }
@@ -45,7 +46,7 @@ public class PersonDaoTestCase {
         // THEN
         assertThat(films).hasSize(1);
         assertThat(films).extracting("id","lastname", "firstname", "nickname", "phone_number", "address", "email_address","birth_date").containsOnly(
-                tuple(1, "Ofori","Joshua","anhydrous","0758153585","1 rue de mons embarol","oforijoshua37@gmail.com", LocalDate.parse("1999-02-20")));
+                tuple(1, "Ofori","Joshua","anhydrous","0758153585","1 rue de mons embarol","oforijoshua37@gmail.com", new Date(20/02/1999)));
 
 
     }
@@ -78,7 +79,7 @@ public class PersonDaoTestCase {
 
 		// WHEN
 		Person person = new Person(2,"Samuel","Boakye","e-brace","07536780","76 rue du trichon","samuel@gmail.com",
-				LocalDate.parse("2001-02-20"));
+				 new Date(20/02/1999));
 		personDao.addPerson(person);
 		// THEN
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
@@ -87,7 +88,7 @@ public class PersonDaoTestCase {
 		assertThat(resultSet.next()).isTrue();
 		assertThat(resultSet.getInt("idperson")).isNotNull();
 		assertThat(resultSet.getString("firstname")).isEqualTo("Boakye");
-		assertThat(resultSet.getDate("birth_date")).isEqualTo(Date.valueOf("2001-02-20"));
+		assertThat(resultSet.getDate("birth_date")).isEqualTo(new Date(20/02/1999));
 		assertThat(resultSet.getString("nickname")).isEqualTo("e-brace");
 		assertThat(resultSet.getString("phone_number")).isEqualTo("07536780");
 		assertThat(resultSet.getString("address")).isEqualTo("76 rue du trichon");
