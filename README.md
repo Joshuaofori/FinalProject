@@ -9,7 +9,9 @@ The table is editable therefore a particula cell in the table can be edited and 
 chages is reflected in the database and on the table.<br/>
 Person on the table can be deleted from the database when you select and click delete.<br/>
 The data in the database can be exported in a Vcard format.
-the export is at ./src/main/resources/files/persons.vcf
+the export is at ./src/main/resources/files/persons.vcf<br/>
+
+![Image description](https://github.com/Joshuaofori/FinalProject/tree/master/src/main/resources/files/app.png)
 
 Flow of Code.<br/>
 Person class is the entity(database) or model class.<br/>
