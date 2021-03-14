@@ -17,24 +17,27 @@ public class PersonService {
     private ObservableList<Person> personObservableList;
 
     private PersonService(){
-        personDao.addPerson(new Person(0, "Ofori","Joshua","anhydrous","0758153585","1 rue du mons",
-                        "oforijoshua37@gmail.com", LocalDate.parse("1999-02-20")));
-        personDao.addPerson(new Person(0,"Adjei","Anthony","d'accord","075367580","76 rue du trichon","tonyadjei@gmail.com",
-                LocalDate.parse("2000-02-25")));
-        personDao.addPerson(new Person(0,"Harris","Hibic","e-brace","075365782","1 rue du bouvedan","harrishibic@gmail.com",
-                LocalDate.parse("1999-02-20")));
-        personDao.addPerson(new Person(0,"Timo","Wener","turbo","175346781","stamford bridge","timowener@gmail.com",
-                LocalDate.parse("1997-02-20")));
-        personDao.addPerson(new Person(0,"Hudson","Odoi","star boy","237536780","stamford bridge","hudsonodoi@gmail.com",
-                LocalDate.parse("2001-02-20")));
         personObservableList= FXCollections.observableArrayList();
-        for(int i=0;i<personDao.listPersons().size();i++){
-            personObservableList.add(personDao.listPersons().get(i));
+        personObservableList.addAll(personDao.listPersons());
+        if(personObservableList.size()<=0) {
+            personDao.addPerson(new Person(0, "Ofori", "Joshua", "anhydrous", "0758153585", "1 rue du mons",
+                    "oforijoshua37@gmail.com", LocalDate.parse("1999-02-20")));
+            personDao.addPerson(new Person(0, "Adjei", "Anthony", "d'accord", "075367580", "76 rue du trichon", "tonyadjei@gmail.com",
+                    LocalDate.parse("2000-02-25")));
+            personDao.addPerson(new Person(0, "Harris", "Hibic", "e-brace", "075365782", "1 rue du bouvedan", "harrishibic@gmail.com",
+                    LocalDate.parse("1999-02-20")));
+            personDao.addPerson(new Person(0, "Timo", "Wener", "turbo", "175346781", "stamford bridge", "timowener@gmail.com",
+                    LocalDate.parse("1997-02-20")));
+            personDao.addPerson(new Person(0, "Hudson", "Odoi", "star boy", "237536780", "stamford bridge", "hudsonodoi@gmail.com",
+                    LocalDate.parse("2001-02-20")));
+
+            personObservableList.addAll(personDao.listPersons());
         }
 
 
 
-    }
+
+        }
     public static ObservableList<Person> getPerson() {
         return PersonServiceHolder.INSTANCE.personObservableList;
     }
@@ -80,13 +83,13 @@ public class PersonService {
                 System.out.println("This file does not exist");
         }
         catch (IOException e){
-
+           e.printStackTrace();
         }
 
     }
     public static void readFile(){
         try{
-                        BufferedReader br = null;
+                        BufferedReader br;
                 String sCurrentLine;
                 br = new BufferedReader(new FileReader("./src/main/resources/files/persons.vcf"));
                 while ((sCurrentLine = br.readLine()) != null) {

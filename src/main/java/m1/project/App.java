@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import m1.project.Daos.PersonDao;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 
@@ -21,6 +22,13 @@ public class App extends Application {
     // Lets add the main layout of our application as a static member, shall we ?
     // This will help us avoiding dodgy explicit casts
     private static BorderPane mainlayout;
+    PersonDao p = new PersonDao();
+    @Override
+    public void init() throws Exception {
+        super.init();
+        //sets up the database first;
+        p.initDb();
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,7 +41,7 @@ public class App extends Application {
         // Back to normal, except we use our newly defined member. Seems cumbersome, but
         // it will make sense in two seconds
         scene = new Scene(mainlayout, 989, 513);
-        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());;
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setScene(scene);
         stage.show();
         // This is also new for this PW : you have to call the default view you want to
